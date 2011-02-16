@@ -50,7 +50,6 @@
 .value {
   display: flex;
   justify-content: space-between;
-
 }
 
 .value input {
@@ -80,5 +79,4 @@
   border: solid 1px #010f3e;
   font-size: large;
   text-align: center;
-
 }

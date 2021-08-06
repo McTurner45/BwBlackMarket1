@@ -41,6 +41,9 @@ export default function LoanDetails() {
             <input type="text" placeholder="Marital Status" />
             <input type="email" placeholder="Monthly Next Income" />
         </div>
+        <div className="button-submit">
+            <p>Submit</p>
+        </div>
     </div>
 
 
@@ -82,12 +85,6 @@ export default function LoanDetails() {
             </div>
             {showEmployeeDetails ? employeeDetails : null}
             {showEmployeeDetails ? personalDetails : null}
-
-            <div className="loan-buttons">
-                <div className="button-proceed button-space">
-                    <p>Submit</p>
-                </div>
-            </div>
         </section >
     );
 }

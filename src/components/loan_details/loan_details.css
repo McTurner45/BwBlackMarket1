@@ -148,5 +148,18 @@
 }
 
 .button-submit {
-  width: 50%;
+
+  margin-top: 20px;
+  background-color: #010f3e;
+  width: wrap;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: large;
+  text-align: center;
+  /* align-self:; */
 }
+
+/* .button-submit p {
+  text-align: center;
+} */

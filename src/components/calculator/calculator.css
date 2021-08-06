@@ -73,10 +73,10 @@
   margin-top: 20px;
   background-color: white;
   width: wrap;
-  border-radius: 5px;
-  padding: 10px;
-  text-align: center;
   color: #010f3e;
+  border-radius: 5px;
+  border: solid 1px #010f3e;
   font-size: large;
-  border: #010f3e solid 1px;
+  text-align: center;
+
 }

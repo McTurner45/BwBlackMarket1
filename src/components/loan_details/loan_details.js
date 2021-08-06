@@ -1,6 +1,10 @@
 import './loan_details.css'
+import { useContext } from "react";
+import { LoanContext } from "../../context";
 
 export default function LoanDetails() {
+
+    const loanContext = useContext(LoanContext)
 
     return (
         <section>
@@ -9,12 +13,12 @@ export default function LoanDetails() {
                 <div className="loan-details-values">
                     <div className="loan-details-value">
                         <span> Loan Amount</span>
-                        <span><input readOnly="true" type="text" placeholder="BWP00000" /></span>
+                        <span><input readOnly="true" type="text" placeholder="BWP00000" value={"BWP " + loanContext.loanNeeded} onChange={e => loanContext.changeInfo({ loanNeeded: e.target.value })} /></span>
                     </div>
                     <hr />
                     <div className="loan-details-value">
                         <span>Months to pay</span>
-                        <span><input type="text" placeholder="BWP00000" /> </span>
+                        <span><input type="text" placeholder="Number of months" value={loanContext.monthsToPay + " months"} /> </span>
                     </div>
                     <hr />
                     <div className="loan-details-value">
@@ -27,9 +31,15 @@ export default function LoanDetails() {
                         <span><input type="text" /> </span>
                     </div>
                     <hr />
-                    <div className="button-proceed">
-                        <p>Save</p>
+                    <div className="loan-buttons">
+                        <div className="button-proceed button-space">
+                            <p>Change</p>
+                        </div>
+                        <div className="button-proceed button-space">
+                            <p>Proceed</p>
+                        </div>
                     </div>
+
                 </div>
             </div>
             <div className="employee-details">

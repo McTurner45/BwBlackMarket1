@@ -135,3 +135,13 @@
 .personal-details-values input:focus {
   outline: none;
 }
+
+.loan-buttons {
+  display: flex;
+  justify-content: flex-end;
+  box-sizing: border-box;
+}
+
+.button-space {
+  padding: 2px;
+}

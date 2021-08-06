@@ -1,0 +1,110 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.contact {
+  border-left: solid gray 1px;
+  padding-left: 10px;
+}
+
+main {
+  font-family: sans-serif;
+  height: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+main h1 {
+  font-size: 39px;
+  width: 32%;
+  margin: 18px;
+}
+
+main h3 {
+  font-weight: lighter;
+  margin: 18px;
+}
+
+.button-calculate {
+  margin-left: 18px;
+  background-color: #010f3e;
+  width: max-content;
+  padding: 20px;
+  color: white;
+  border-radius: 5px;
+}
+
+.modal {
+  font-family: Roboto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* border: 1px solid #ccc; */
+  background: #fff;
+  overflow: auto;
+  border-radius: 20px;
+  outline: none;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  width: 60%;
+  line-height: 40px;
+}
+
+.proceed {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.myoverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.close {
+  text-align: end;
+}
+
+.membership-modal input {
+  border: 0px;
+  outline: none;
+  border-bottom: solid 1px lightgray;
+  font-size: 18px;
+  padding: 10px;
+  /* margin: 10px; */
+}
+
+.otp-modal input {
+  border: 0px;
+  outline: none;
+  border-bottom: solid 1px lightgray;
+  font-size: 18px;
+  padding: 10px;
+  /* margin: 10px; */
+}
+
+.center-flex {
+  justify-content: center;
+}
+
+.radio-options span {
+  margin: 10px;
+}
+
+.login-modal {
+  margin-top: 40px;
+}

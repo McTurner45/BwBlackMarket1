@@ -1,0 +1,137 @@
+.loan-details {
+  width: 60%;
+  font-family: Roboto;
+  font-size: 14px;
+  box-shadow: 0px 0px 5px#888888;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 2%;
+  border-radius: 6px;
+}
+
+.loan-details-value span {
+  font-size: 14px;
+}
+
+.loan-details h3 {
+  font-family: Roboto;
+  font-size: x-large;
+  font-weight: bolder;
+  padding-left: 5%;
+  padding-top: 5%;
+}
+
+.loan-details-values {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 5%;
+}
+
+.loan-details-value {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  outline: none;
+  padding: 1%;
+  font-size: 18px;
+}
+
+.loan-details-value input:focus {
+  border: 0px;
+  outline: none;
+}
+
+.loan-details-value input {
+  border: 0px;
+  line-height: 25px;
+  font-size: 14px;
+}
+
+.button-proceed p {
+  margin-top: 20px;
+  background-color: #010f3e;
+  width: wrap;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: large;
+  text-align: center;
+  align-self: flex-end;
+}
+
+.button-proceed p:active {
+  margin-top: 20px;
+  background-color: white;
+  width: wrap;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  color: #010f3e;
+  font-size: large;
+  border: #010f3e solid 1px;
+}
+
+.employee-details {
+  width: 60%;
+  font-family: Roboto;
+  box-shadow: 0px 0px 10px#888888;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 2%;
+  padding-bottom: 5%;
+}
+
+.employee-details h3 {
+  font-family: Roboto;
+  font-size: x-large;
+  font-weight: bolder;
+  padding-left: 5%;
+  padding-top: 5%;
+  margin-bottom: 5%;
+}
+.employee-details p {
+  font-family: Roboto;
+  font-size: medium;
+  padding-left: 5%;
+  margin-bottom: 5%;
+}
+.employee-choice {
+  padding: 5%;
+}
+
+.personal-details {
+  width: 60%;
+  font-family: Roboto;
+  box-shadow: 0px 0px 10px#888888;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 2%;
+  padding-bottom: 5%;
+}
+
+.personal-details h3 {
+  font-size: x-large;
+  padding: 5%;
+}
+
+.personal-details div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.personal-details-values input {
+  width: 100%;
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-top: 2%;
+  font-size: 20px;
+  border: none;
+  border-bottom: solid 1px lightgray;
+}
+
+.personal-details-values input:focus {
+  outline: none;
+}

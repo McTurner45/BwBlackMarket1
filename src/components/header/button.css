@@ -1,0 +1,8 @@
+.button {
+  font: Roboto;
+  background-color: #010f3e;
+  color: white;
+  width: 200px;
+  border-radius: 10px;
+  text-align: center;
+}

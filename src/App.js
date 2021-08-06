@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/header/header'
+import Calculator from './components/calculator/calculator'
+import LoanDetails from './components/loan_details/loan_details'
+import { useState } from 'react';
 
 function App() {
+
+  const [loanDetailsIsVisible, setLoanDetailsIsVisible] = useState(false);
+
+  const toggleInvisible = () => {
+    setLoanDetailsIsVisible(true);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header toggleInvisible={toggleInvisible} />
+      <div className="calculator-section">
+        <Calculator />
+      </div>
+
+      {loanDetailsIsVisible ? <LoanDetails /> : <h1>Placeholder</h1>}
+
     </div>
   );
 }

@@ -2,42 +2,52 @@ header {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;
+  font-family: Roboto;
 }
 
 .contact {
   border-left: solid gray 1px;
   padding-left: 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
 }
 
 main {
   font-family: sans-serif;
-  height: 340px;
+  height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-left: 50px;
 }
 
 main h1 {
   font-size: 39px;
   width: 32%;
   margin: 18px;
+  color: lightblue;
 }
 
 main h3 {
-  font-weight: lighter;
+  font-weight: 400;
   margin: 18px;
+  color: white;
 }
 
 .button-calculate {
   margin-left: 18px;
   background-color: #010f3e;
   width: max-content;
-  padding: 20px;
+  padding: 14px;
   color: white;
+  font-size: 14px;
   border-radius: 5px;
 }
 
@@ -107,4 +117,17 @@ main h3 {
 
 .login-modal {
   margin-top: 40px;
+}
+
+.description {
+  display: flex;
+  width: 300px;
+  justify-content: space-between;
+  margin-left: 20px;
+  color: white;
+}
+
+.top-border {
+  border-top: solid white 5px;
+  padding-top: 10px;
 }

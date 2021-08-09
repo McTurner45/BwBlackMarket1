@@ -50,6 +50,7 @@
 .value {
   display: flex;
   justify-content: space-between;
+
 }
 
 .value input {
@@ -57,6 +58,7 @@
   outline: 0;
   background: transparent;
   border-bottom: 1px solid gray;
+  text-align: end;
 }
 
 .button-apply p {

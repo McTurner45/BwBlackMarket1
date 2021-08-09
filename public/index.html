@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -24,12 +22,178 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
+  <title>React App</title>
+  <style>
+    aside {
+      width: 24.5%;
+      /* border: red 2px solid; */
+      float: right;
+      margin: 25px 100px 25px 0px;
+      color: white;
+    }
+
+    aside h4 {
+      text-align: center;
+      background-color: #17B1F0;
+      padding: 20px;
+      margin: 0px;
+      font-weight: normal;
+    }
+
+    aside .triangle {
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 8px solid #17B1F0;
+      margin: 0 auto;
+    }
+
+
+
+
+
+
+
+    section {
+      margin: 25px 0px 25px 100px;
+      width: 60%;
+      /* border: red 2px solid; */
+    }
+
+    section .squre {
+      background-color: #17B1F0;
+      margin: 0px 0px 5px 0px;
+      width: 25px;
+      height: 25px;
+    }
+
+    section h5 {
+      margin: 0px 0px 10px 0px;
+      color: #010F3E;
+    }
+
+    section h1 {
+      margin: 0px 0px 10px 0px;
+      color: #010F3E;
+    }
+
+    section p {
+      margin: 0px 0px 10px 0px;
+      font-size: small
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    footer {
+      color: white;
+      font-size: small;
+      background-color: #010F3E;
+      padding: 25px 100px 25px 100px;
+      margin-top: 200px;
+    }
+
+    footer .footerContainerOne {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    footer .footerContainerTwo p {
+      margin: 25px 0px 0px 0px;
+    }
+
+    footer .footerContainerTwo p a {
+      margin: 25px 0px 0px 0px;
+      color: #4089BE;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <footer>
+    <div class="footerContainerOne">
+      <!--first container-->
+      <div class="insideFooterContainerOne" style="flex-grow: 3">
+        <div style="margin-bottom: 10px;">
+          <i class="fab fa-facebook-square" style="color: #4089BE; font-size: large; margin-right: 10px;"></i>
+          <i class="fab fa-twitter" style="color: #4089BE; font-size: large; margin-right: 10px;"></i>
+          <i class="fab fa-linkedin-in" style="color: #4089BE; font-size: large; margin-right: 10px;"></i>
+          <i class="fab fa-instagram" style="color: #4089BE; font-size: large; margin-right: 10px;"></i>
+        </div>
+
+
+        <div style="font-size: 20px; width: 50%;">
+          <p><strong>LOGO</strong> </p>
+        </div>
+      </div>
+
+      <!--second container-->
+      <div class="insideFooterContainerOne" style="flex-grow: 3">
+        <p style="margin: 0px 0px 10px 0px;"><strong>Support</strong></p>
+
+        <div style="line-height: 1.6;">
+          <a href="#" style="text-decoration: none; color: white;">About Us</a> <br>
+          <a href="#" style="text-decoration: none; color: white;">Contact Us</a> <br>
+          <a href="#" style="text-decoration: none; color: white;">FAQs</a> <br>
+          <a href="#" style="text-decoration: none; color: white;">Locate A Branch</a>
+        </div>
+      </div>
+
+      <!--third container-->
+      <div class="insideFooterContainerOne" style="flex-grow: 8">
+        <p style="margin: 0px 0px 10px 0px;"><strong>Bayport</strong></p>
+
+        <div style="line-height: 1.6;">
+          <a href="#" style="text-decoration: none; color: white;">Loans</a> <br>
+          <a href="#" style="text-decoration: none; color: white;">How It Works?</a>
+        </div>
+      </div>
+
+      <!--forth container-->
+      <div class="insideFooterContainerOne" style="flex-grow: 1">
+        <i class="fas fa-envelope" style="color: #4089BE; font-size: large;">
+          <span
+            style="color: white; font-size: small; font-family: Arial, Helvetica, sans-serif; font-weight: normal;">needhelp@company.com</span>
+        </i>
+        <p></p>
+        <br>
+
+        <hr>
+        <button
+          style="outline: none; width: 100%; background-color: #17B1F0; border: none; color: white; padding: 10px;">Enquire</button>
+        <p>
+          <span style="color: #4089BE;">+267 70000000</span> <br>
+
+          Mon-Sat 8:00 AM - 6:00 PM
+
+        </p>
+      </div>
+    </div>
+
+
+    <div class="footerContainerTwo">
+      <p>
+        Copyright &copy; Bayport. All rights reserved &emsp;
+        <a href="#">Privacy policy</a> &emsp;
+        <a href="#">Terms of Use</a>
+      </p>
+    </div>
+
+  </footer>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -39,5 +203,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>

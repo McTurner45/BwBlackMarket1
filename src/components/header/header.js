@@ -2,6 +2,8 @@ import './header.css'
 import { useRef, useState } from 'react';
 import Modal from "react-modal";
 import Button from './button';
+import bayportLogo from "./bayportlogo.png";
+import background from './image.png';
 
 Modal.setAppElement("#root");
 
@@ -44,16 +46,16 @@ export default function Header({ toggleInvisible }) {
                     <div className="membership-modal">
 
                         <div className="close" onClick={toggleModal}>close</div>
-                        <div><h1>Membership</h1></div>
+                        <div><h1>Customer</h1></div>
                         <div>
-                            <p>Are you a new member?</p>
+                            <p>Are you a new customer?</p>
                         </div>
                         <div className="radio-options">
                             <span><input type="radio" name="membership" value="yes" onChange={(e) => setMembership(e.target.value)} /> Yes</span>
                             <span><input type="radio" name="membership" value="no" onChange={(e) => setMembership(e.target.value)} /> No</span>
                         </div>
                         <div className="proceed">
-                            <Button onclick={() => changeCycle(membership)} label="Proceed"/>
+                            <Button onclick={() => changeCycle(membership)} label="Proceed" />
                         </div>
                     </div>
                 )
@@ -64,7 +66,7 @@ export default function Header({ toggleInvisible }) {
             case "yes":
                 components = (
                     <>
-                        <div className="login-modal">
+                        <div className="membership-modal">
                             <div className="close" onClick={toggleModal}>close</div>
                             <div className="title"><h1>Membership</h1></div>
                             <input type="text" placeholder="ID / Passport Number " />
@@ -72,7 +74,7 @@ export default function Header({ toggleInvisible }) {
                                 <p>Proceed</p>
                             </div> */}
                             <div className="proceed">
-                                <Button onclick={() => changeCycle('otp')} label="Proceed"/>
+                                <Button onclick={() => changeCycle('otp')} label="Proceed" />
                             </div>
                         </div>
                     </>
@@ -82,14 +84,14 @@ export default function Header({ toggleInvisible }) {
                 components = (
                     <div className="otp-modal">
                         <div className="close" onClick={toggleModal}>close</div>
-                            <div className="title"><h1>OTP Verification</h1></div>
-                            <input type="text" placeholder="OTP Code " />
-                            {/* <div onClick={() => changeCycle("otp")}>
+                        <div className="title"><h1>OTP Verification</h1></div>
+                        <input type="text" placeholder="OTP Code " />
+                        {/* <div onClick={() => changeCycle("otp")}>
                                 <p>Proceed</p>
                             </div> */}
-                            <div className="proceed">
-                                <Button onclick={() => toggleVisibility()} label="Proceed"/>
-                            </div>
+                        <div className="proceed">
+                            <Button onclick={() => toggleVisibility()} label="Proceed" />
+                        </div>
                     </div>
                 );
                 break;
@@ -105,19 +107,31 @@ export default function Header({ toggleInvisible }) {
     return (<>
         <header>
             <div className="logo">
-                <h3>LOGO</h3>
+                {/* <h3>LOGO</h3> */}
+                <img src={bayportLogo} style={{ marginLeft: '50px' }} height="60px" alt="" />
             </div>
             <div className="contact">
                 <p className="title">Call anytime</p>
                 <p className="subtitle">+26777777777</p>
             </div>
         </header>
-        <main style={{ backgroundColor: 'skyblue' }}>
+        <main style={{
+            backgroundImage: `url(${background})`,
+            backgroundPositionX: "80%"
+        }}>
             <h3>Welcome to Bayport</h3>
             <h1>Apply For A Loan That Is Right For You</h1>
             {isButtonVisible ? <div className="button-calculate" onClick={toggleModal}>
                 <p ref={applyButton}>Calculate Loan</p>
             </div> : null}
+
+            <br />
+            <br />
+
+            <div className="description">
+                <div className="top-border"><p>Quick Payment</p></div>
+                <div className="top-border"><p>Competitive Interest</p></div>
+            </div>
         </main>
         <Modal
             isOpen={isOpen}

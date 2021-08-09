@@ -3,6 +3,8 @@ import Calculator from './components/calculator/calculator'
 import LoanDetails from './components/loan_details/loan_details'
 import { useState } from 'react';
 import { LoanContext } from "./context";
+import Landing from './components/landing/landing';
+import Footer from './components/footer/footer';
 
 
 function App() {
@@ -17,6 +19,14 @@ function App() {
     nextPaymentDate: Date("01/01/2022"),
     monthlyLoanRepayment: 0,
     nextPaymentDateAt: Date("01/01/2022"),
+    governmentEmployee: null,
+    names: null,
+    surname: null,
+    phoneNumber: null,
+    emailAddress: null,
+    omang: null,
+    dob: null,
+    mariatalStatus: null,
   })
 
   const changeInfo = (obj) => {
@@ -40,8 +50,8 @@ function App() {
           <Calculator />
         </div>
 
-        {loanDetailsIsVisible ? <LoanDetails /> : <h1>Placeholder</h1>}
-
+        {loanDetailsIsVisible ? <LoanDetails /> : <Landing />}
+        {<Footer />}
       </div>
     </LoanContext.Provider>
   );

@@ -51,7 +51,7 @@ function App() {
         </div>
 
         {loanDetailsIsVisible ? <LoanDetails /> : <Landing />}
-        {<Footer />}
+        {/* {<Footer />} */}
       </div>
     </LoanContext.Provider>
   );

@@ -51,8 +51,8 @@ export default function Header({ toggleInvisible }) {
                             <p>Are you a new customer?</p>
                         </div>
                         <div className="radio-options">
-                            <span><input type="radio" name="membership" value="yes" onChange={(e) => setMembership(e.target.value)} /> Yes</span>
-                            <span><input type="radio" name="membership" value="no" onChange={(e) => setMembership(e.target.value)} /> No</span>
+                            <span><input type="radio" name="membership" value="no" onChange={(e) => setMembership(e.target.value)} /> Yes</span>
+                            <span><input type="radio" name="membership" value="yes" onChange={(e) => setMembership(e.target.value)} /> No</span>
                         </div>
                         <div className="proceed">
                             <Button onclick={() => changeCycle(membership)} label="Proceed" />

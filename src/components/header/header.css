@@ -11,12 +11,17 @@ header {
 
 .contact {
   border-left: solid gray 1px;
-  padding-left: 10px;
-  font-size: 14px;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
   flex-direction: column;
+  align-items: flex-start;
+  padding-left: 40px;
+}
+
+.contact .title {
+  color: gray;
+}
+.contact .subtitle {
+  text-align: left;
 }
 
 main {

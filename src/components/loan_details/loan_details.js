@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './loan_details.css'
 
-export default function LoanDetails({visibility}) {
+export default function LoanDetails({visibility, info}) {
 
     const [personalDetailsVisible, setPersonalDetailsVisible] = useState(false)
 
@@ -12,19 +12,19 @@ export default function LoanDetails({visibility}) {
                 <div className="loan-details-values">
                     <div className="loan-details-value">
                         <span> Loan Amount</span>
-                        <span><input readOnly="true" type="text" placeholder="BWP00000" /></span>
+                        <span><input readOnly="true" type="text" placeholder="BWP00000" value={`BWP ${info.loanNeeded}`} /></span>
                     </div>
                     <hr />
                     <div className="loan-details-value">
                         <span>Months to pay</span>
-                        <span><input type="text" placeholder="BWP00000" /> </span>
+                        <span><input readOnly="true"  type="text" placeholder="0 months" value={`${info.monthsToPay} months`} /> </span>
                     </div>
                     <hr />
-                    <div className="loan-details-value">
+                    {/* <div className="loan-details-value">
                         <span>Next payment date</span>
-                        <span><input type="date" /> </span>
-                    </div>
-                    <hr />
+                        <span><input readOnly="true" type="date" value={info.} /> </span>
+                    </div> */}
+                    {/* <hr /> */}
                     <div className="loan-details-value">
                         <span>Monthly Installments</span>
                         <span><input type="text" /> </span>
@@ -63,7 +63,7 @@ export default function LoanDetails({visibility}) {
                 </div>
                 <div className="personal-details-values">
                     <input type="text" placeholder="Marital Status" />
-                    <input type="email" placeholder="Monthly Next Income" />
+                    {/* <input type="email" placeholder="Monthly Next Income" /> */}
                 </div>
             </div> : null}
         </section>

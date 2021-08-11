@@ -71,7 +71,7 @@ function App() {
           {visibility.existingCustomer || visibility.newCustomer? <Calculator /> : null}
         </div> : null}
 
-        {visibility.existingCustomer || visibility.newCustomer  ? <LoanDetails visibility={visibility} /> : <Landing />}
+        {visibility.existingCustomer || visibility.newCustomer  ? <LoanDetails visibility={visibility} info={info} /> : <Landing />}
         {/* {<Footer />} */}
       </div>
     </LoanContext.Provider>

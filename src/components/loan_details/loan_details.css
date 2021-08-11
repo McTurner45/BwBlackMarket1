@@ -162,3 +162,8 @@
 /* .button-submit p {
   text-align: center;
 } */
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}

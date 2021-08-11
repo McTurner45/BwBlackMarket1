@@ -47,6 +47,9 @@ export default function Calculator() {
                 <div className="button-apply" onClick={() => setToggleRO(!toggleRO)}>
                     {toggleRO ? <p>Change</p> : <p>Apply</p>}
                 </div>
+                { !toggleRO && <div style={{textAlign: 'center', fontSize: '8px', color: 'red'}}>
+                    <p>**This application serves as only a quotation and is therefore non-binding</p>
+                </div>}
 
             </div>
             {/* <div className="button-apply">

@@ -4,6 +4,7 @@ import './loan_details.css'
 export default function LoanDetails({visibility, info}) {
 
     const [employmentDetails, setEmploymentDetails] = useState(false)
+    const [agreement, setAggrement] = useState(false)
 
     return (
         <section>
@@ -32,14 +33,27 @@ export default function LoanDetails({visibility, info}) {
                         <span><input type="text"/> </span>
                     </div>
                     <hr/>
-                    <div className="buttons">
-                        <div className="button-proceed button-space">
-                            <p>Change</p>
-                        </div>
-                        <div className="button-proceed button-space" onClick={()=>setEmploymentDetails(!employmentDetails)}>
-                            <p>Proceed</p>
-                        </div>
+                    <br/>
+                    <div style={{textAlign: 'left', fontSize: '8px', color: 'red'}}>
+                        <p>**This application serves as only a quotation and is therefore non-binding</p>
                     </div>
+                    <br/>
+                    <div>
+                        <div>
+                            <input type='checkbox' checked={agreement} onChange={()=>setAggrement(!agreement)}/> I
+                            have read and understand the terms and conditions
+                        </div>
+                        {agreement ? <div className="buttons">
+                            <div className="button-proceed button-space">
+                                <p>Change</p>
+                            </div>
+                            <div className="button-proceed button-space"
+                                 onClick={() => setEmploymentDetails(!employmentDetails)}>
+                                <p>Proceed</p>
+                            </div>
+                        </div> : null}
+                    </div>
+
                 </div>
             </div>
             {employmentDetails ? <div className="employee-details">

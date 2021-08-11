@@ -9,20 +9,9 @@ header {
   font-family: Roboto;
 }
 
-.contact {
-  border-left: solid gray 1px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-left: 40px;
-}
 
-.contact .title {
-  color: gray;
-}
-.contact .subtitle {
-  text-align: left;
-}
+
+
 
 main {
   font-family: sans-serif;
@@ -142,3 +131,14 @@ main h3 {
   border-top: solid white 5px;
   padding-top: 10px;
 }
+
+.contact {
+  border-left: solid gray 1px;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: left;
+  padding-left: 20px;
+}
+

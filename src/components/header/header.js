@@ -127,8 +127,8 @@ export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) 
                 <img src={bayportLogo} style={{ marginLeft: '50px' }} height="60px" alt="" />
             </div>
             <div className="contact">
-                <div className="title">Call anytime</div>
-                <div className="subtitle">3936456</div>
+                <div className="c-title">Call anytime</div>
+                <div className="c-subtitle">(+267) 393 6456</div>
             </div>
         </header>
         <main style={{

@@ -7,7 +7,7 @@ import background from './image.png';
 
 Modal.setAppElement("#root");
 
-export default function Header({ toggleInvisible }) {
+export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -23,8 +23,13 @@ export default function Header({ toggleInvisible }) {
         setStateCycle(value);
     }
 
-    const toggleVisibility = () => {
-        toggleInvisible();
+    const toggleVisibilityExisting = () => {
+        toggleInvisibleExisting();
+        setIsOpen(false);
+    }
+
+    const toggleVisibilityNew = () => {
+        toggleInvisibleNew();
         setIsOpen(false);
     }
 
@@ -61,7 +66,15 @@ export default function Header({ toggleInvisible }) {
                 )
                 break;
             case "no":
-                components = <h1>Register</h1>
+                components = (
+                    <div className="otp-modal">
+                        <div className="close" onClick={toggleModal}>close</div>
+                        <div className="title"><h1>Proceed</h1></div>
+                        <div className="proceed">
+                            <Button onclick={() => toggleVisibilityNew()} label="Proceed" />
+                        </div>
+                    </div>
+                );
                 break;
             case "yes":
                 components = (
@@ -90,7 +103,7 @@ export default function Header({ toggleInvisible }) {
                                 <p>Proceed</p>
                             </div> */}
                         <div className="proceed">
-                            <Button onclick={() => toggleVisibility()} label="Proceed" />
+                            <Button onclick={() => toggleVisibilityExisting()} label="Proceed" />
                         </div>
                     </div>
                 );

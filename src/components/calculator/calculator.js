@@ -31,18 +31,18 @@ export default function Calculator() {
                     <span>Allowances</span>
                     <span><input readOnly={toggleRO} type="number" value={loanContext.allowances} onChange={e => loanContext.changeInfo({ allowances: e.target.value })} /></span>
                 </div>
-                <div className="value">
+                {/* <div className="value">
                     <span>Next Payment Date</span>
                     <span><input readOnly={toggleRO} type="date" value={loanContext.nextPaymentDate} onChange={e => loanContext.changeInfo({ nextPaymentDate: e.target.value })} /></span>
-                </div>
+                </div> */}
                 <div className="value">
                     <span>Monthly Loan Repayment</span>
                     <span><input readOnly={toggleRO} type="number" value={loanContext.monthlyLoanRepayment} onChange={e => loanContext.changeInfo({ monthlyLoanRepayment: e.target.value })} /></span>
                 </div>
-                <div className="value">
+                {/* <div className="value">
                     <span>Next Payment Date At</span>
                     <span><input readOnly={toggleRO} type="date" value={loanContext.nextPaymentDateAt} onChange={e => loanContext.changeInfo({ nextPaymentDateAt: e.target.value })} /></span>
-                </div>
+                </div> */}
 
                 <div className="button-apply" onClick={() => setToggleRO(!toggleRO)}>
                     {toggleRO ? <p>Change</p> : <p>Apply</p>}

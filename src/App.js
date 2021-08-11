@@ -9,7 +9,10 @@ import Footer from './components/footer/footer';
 
 function App() {
 
-  const [loanDetailsIsVisible, setLoanDetailsIsVisible] = useState(false);
+  const [visibility, setVisibility] = useState({
+    newCustomer : false,
+    existingCustomer : false,
+  });
   const [info, setInfo] = useState({
     loanNeeded: 0,
     monthsToPay: 1,
@@ -27,6 +30,7 @@ function App() {
     omang: null,
     dob: null,
     mariatalStatus: null,
+
   })
 
   const changeInfo = (obj) => {
@@ -38,19 +42,36 @@ function App() {
     });
   }
 
-  const toggleInvisible = () => {
-    setLoanDetailsIsVisible(true);
+  const toggleInvisibleExisting = () => {
+    setVisibility(prev => {
+      return {
+        ...prev,
+        existingCustomer: true
+      }
+    } );
   }
+
+  const toggleInvisibleNew = () => {
+    setVisibility(prev => {
+      return {
+        ...prev,
+        newCustomer: true
+      }
+    } );
+  }
+
+
+  // const calculatorComponent = 
 
   return (
     <LoanContext.Provider value={{ ...info, changeInfo }}>
       <div className="App">
-        <Header toggleInvisible={toggleInvisible} />
-        <div className="calculator-section">
-          <Calculator />
-        </div>
+        <Header toggleInvisibleExisting={toggleInvisibleExisting} toggleInvisibleNew={toggleInvisibleNew} />
+       { visibility ?  <div className="calculator-section">
+          {visibility.existingCustomer || visibility.newCustomer? <Calculator /> : null}
+        </div> : null}
 
-        {loanDetailsIsVisible ? <LoanDetails /> : <Landing />}
+        {visibility.existingCustomer || visibility.newCustomer  ? <LoanDetails visibility={visibility} /> : <Landing />}
         {/* {<Footer />} */}
       </div>
     </LoanContext.Provider>

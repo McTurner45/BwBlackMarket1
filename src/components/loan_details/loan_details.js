@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './loan_details.css'
 
-export default function LoanDetails() {
+export default function LoanDetails({visibility}) {
 
     const [personalDetailsVisible, setPersonalDetailsVisible] = useState(false)
 
@@ -47,7 +47,7 @@ export default function LoanDetails() {
                     </span>
                 </div>
             </div>
-            <div className="personal-details">
+            { visibility.newCustomer ?  <div className="personal-details">
                 <h3>Personnal Details</h3>
                 <div className="personal-details-values">
                     <input type="text" placeholder="Names" />
@@ -65,7 +65,7 @@ export default function LoanDetails() {
                     <input type="text" placeholder="Marital Status" />
                     <input type="email" placeholder="Monthly Next Income" />
                 </div>
-            </div>
+            </div> : null}
         </section>
     );
 }

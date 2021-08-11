@@ -10,8 +10,19 @@ export default function Landing() {
             <div className="box"></div>
             <div className="subtitle">Get to know us</div>
             <div className="landing-intro">
-                <h1>Lorem Ipsum </h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae nobis reiciendis vitae, nulla placeat sapiente quod dolor, repudiandae corporis omnis ipsa cupiditate eligendi optio iste vero possimus eius laboriosam praesentium?</p>
+                <h1>Get a loan up to P500 000 </h1>
+                <br />
+                <div>
+                    <h2>You will need these documents when applying for your personal loan</h2>
+                    <br />
+                    <p>
+                        <ul>
+                            <li>Omang or passport</li>
+                            <li>Latest Payslip</li>
+                            <li>Last 3 months bank statement</li>
+                        </ul>
+                    </p>
+                </div>
             </div>
         </div>
     )

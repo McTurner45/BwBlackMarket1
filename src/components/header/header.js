@@ -93,6 +93,23 @@ export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) 
                                 <p>Proceed</p>
                             </div> */}
                             <div className="proceed">
+                                <Button onclick={() => changeCycle('confirm_no')} label="Proceed" />
+                            </div>
+                        </div>
+                    </>
+                )
+                break;
+                case "confirm_no":
+                components = (
+                    <>
+                        <div className="membership-modal">
+                            <div className="close" onClick={toggleModal}>close</div>
+                            <div className="title"><h1>Confirm phone number</h1></div>
+                            <input type="text" placeholder="Phone Number " />
+                            {/* <div onClick={() => changeCycle("otp")}>
+                                <p>Proceed</p>
+                            </div> */}
+                            <div className="proceed">
                                 <Button onclick={() => changeCycle('otp')} label="Proceed" />
                             </div>
                         </div>

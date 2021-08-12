@@ -68,7 +68,8 @@ function App() {
       <div className="App">
         <Header toggleInvisibleExisting={toggleInvisibleExisting} toggleInvisibleNew={toggleInvisibleNew} />
        { visibility ?  <div className="calculator-section">
-          {visibility.existingCustomer || visibility.newCustomer? <Calculator /> : null}
+          {/*{visibility.existingCustomer || visibility.newCustomer? <Calculator /> : null}*/}
+          <Calculator />
         </div> : null}
 
         {visibility.existingCustomer || visibility.newCustomer  ? <LoanDetails visibility={visibility} info={info} /> : <Landing />}

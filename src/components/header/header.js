@@ -51,10 +51,10 @@ export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) 
                     <div className="membership-modal">
 
                         <div className="close" onClick={toggleModal}>close</div>
-                        <div><h1>Are you a new customer?</h1></div>
-                        {/* <div>
+                        <div><h1>Customer</h1></div>
+                        <div>
                             <p>Are you a new customer?</p>
-                        </div> */}
+                        </div>
                         <div className="radio-options">
                             <span><input type="radio" name="membership" value="no" onChange={(e) => setMembership(e.target.value)} /> Yes</span>
                             <span><input type="radio" name="membership" value="yes" onChange={(e) => setMembership(e.target.value)} /> No</span>
@@ -76,6 +76,9 @@ export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) 
                     <div className="otp-modal">
                         <div className="close" onClick={toggleModal}>close</div>
                         <div className="title"><h1>Proceed</h1></div>
+                        <div>
+                            <p></p>
+                        </div>
                         <div className="proceed">
                             <Button onclick={() => toggleVisibilityNew()} label="Proceed" />
                         </div>
@@ -87,7 +90,10 @@ export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) 
                     <>
                         <div className="membership-modal">
                             <div className="close" onClick={toggleModal}>close</div>
-                            <div className="title"><h1>Customer</h1></div>
+                            <div className="title"><h1>Login</h1></div>
+                            <div>
+                                <p></p>
+                            </div>
                             <input type="text" placeholder="ID / Passport Number " />
                             {/* <div onClick={() => changeCycle("otp")}>
                                 <p>Proceed</p>
@@ -104,7 +110,10 @@ export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) 
                     <>
                         <div className="membership-modal">
                             <div className="close" onClick={toggleModal}>close</div>
-                            <div className="title"><h1>Confirm phone number</h1></div>
+                            <div className="title"><h1>Confirmation</h1></div>
+                            <div>
+                                <p>Phone number confirmation</p>
+                            </div>
                             <input type="text" placeholder="Phone Number " />
                             {/* <div onClick={() => changeCycle("otp")}>
                                 <p>Proceed</p>
@@ -120,7 +129,10 @@ export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) 
                 components = (
                     <div className="otp-modal">
                         <div className="close" onClick={toggleModal}>close</div>
-                        <div className="title"><h1>Please enter verification code sent to you?</h1></div>
+                        <div className="title"><h1>Verification code</h1></div>
+                        <div>
+                            <p>Please enter verification code sent to you?</p>
+                        </div>
                         <input type="text" placeholder="OTP Code " />
                         <div className="proceed">
                             <Button onclick={() => toggleVisibilityExisting()} label="Proceed" />

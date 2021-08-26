@@ -1,5 +1,5 @@
 import './header.css'
-import { useRef, useState } from 'react';
+import {useRef, useState} from 'react';
 import Modal from "react-modal";
 import Button from './button';
 import bayportLogo from "./bayportlogo.png";
@@ -7,7 +7,7 @@ import background from './image.png';
 
 Modal.setAppElement("#root");
 
-export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) {
+export default function Header({toggleInvisibleExisting, toggleInvisibleNew}) {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -22,6 +22,29 @@ export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) 
     const changeCycle = (value) => {
         setStateCycle(value);
     }
+
+    const changeCycleAndSend = (value) => {
+        var formData = new FormData();
+        formData.append('Username', 'Bayport');
+        formData.append('Password', 'bay123');
+        formData.append('From', '12345');
+        formData.append('To', '76165587');
+        formData.append('Message', 'test');
+
+        fetch('http://services.newline.co.bw/MMWebService/MessageMaster.aspx?Handler=SendTextMessage&ShowMethodInfo=1', {
+            method: 'POST',
+            body: formData,
+            referrerPolicy: 'unsafe-url',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            }
+
+        })
+            .then(() => setStateCycle(value))
+            .catch(e => console.error(e));
+
+    }
+
 
     const toggleVisibilityExisting = () => {
         toggleInvisibleExisting();
@@ -56,17 +79,19 @@ export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) 
                             <p>Are you a new customer?</p>
                         </div>
                         <div className="radio-options">
-                            <span><input type="radio" name="membership" value="no" onChange={(e) => setMembership(e.target.value)} /> Yes</span>
-                            <span><input type="radio" name="membership" value="yes" onChange={(e) => setMembership(e.target.value)} /> No</span>
+                            <span><input type="radio" name="membership" value="no"
+                                         onChange={(e) => setMembership(e.target.value)}/> Yes</span>
+                            <span><input type="radio" name="membership" value="yes"
+                                         onChange={(e) => setMembership(e.target.value)}/> No</span>
                         </div>
                         <div className="proceed">
                             <Button onclick={() => {
                                 if (membership == "yes") {
                                     changeCycle(membership)
-                                }else{
+                                } else {
                                     toggleVisibilityNew()
                                 }
-                            }} label="Proceed" />
+                            }} label="Proceed"/>
                         </div>
                     </div>
                 )
@@ -80,7 +105,7 @@ export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) 
                             <p></p>
                         </div>
                         <div className="proceed">
-                            <Button onclick={() => toggleVisibilityNew()} label="Proceed" />
+                            <Button onclick={() => toggleVisibilityNew()} label="Proceed"/>
                         </div>
                     </div>
                 );
@@ -94,18 +119,18 @@ export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) 
                             <div>
                                 <p></p>
                             </div>
-                            <input type="text" placeholder="ID / Passport Number " />
+                            <input type="text" placeholder="ID / Passport Number "/>
                             {/* <div onClick={() => changeCycle("otp")}>
                                 <p>Proceed</p>
                             </div> */}
                             <div className="proceed">
-                                <Button onclick={() => changeCycle('confirm_no')} label="Proceed" />
+                                <Button onclick={() => changeCycle('confirm_no')} label="Proceed"/>
                             </div>
                         </div>
                     </>
                 )
                 break;
-                case "confirm_no":
+            case "confirm_no":
                 components = (
                     <>
                         <div className="membership-modal">
@@ -114,12 +139,12 @@ export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) 
                             <div>
                                 <p>Phone number confirmation</p>
                             </div>
-                            <input type="text" placeholder="Phone Number " />
+                            <input type="text" placeholder="Phone Number "/>
                             {/* <div onClick={() => changeCycle("otp")}>
                                 <p>Proceed</p>
                             </div> */}
                             <div className="proceed">
-                                <Button onclick={() => changeCycle('otp')} label="Proceed" />
+                                <Button onclick={() => changeCycle('otp')} label="Proceed"/>
                             </div>
                         </div>
                     </>
@@ -133,9 +158,9 @@ export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) 
                         <div>
                             <p>Please enter verification code sent to you?</p>
                         </div>
-                        <input type="text" placeholder="OTP Code " />
+                        <input type="text" placeholder="OTP Code "/>
                         <div className="proceed">
-                            <Button onclick={() => toggleVisibilityExisting()} label="Proceed" />
+                            <Button onclick={() => toggleVisibilityExisting()} label="Proceed"/>
                         </div>
                     </div>
                 );
@@ -150,45 +175,45 @@ export default function Header({ toggleInvisibleExisting, toggleInvisibleNew }) 
 
 
     return (<>
-        <header>
-            <div className="logo">
-                {/* <h3>LOGO</h3> */}
-                <img src={bayportLogo} style={{ marginLeft: '50px' }} height="60px" alt="" />
-            </div>
-            <div className="contact">
-                <div className="c-title">Call anytime</div>
-                <div className="c-subtitle">(+267) 393 6456</div>
-            </div>
-        </header>
-        <main style={{
-            backgroundImage: `url(${background})`,
-            backgroundPositionX: "80%"
-        }}>
-            <h3>Welcome to Bayport</h3>
-            <h1>Apply For A Loan That Is Right For You</h1>
-            {isButtonVisible ? <div className="button-calculate" onClick={toggleModal}>
-                <p ref={applyButton}>Calculate Loan</p>
-            </div> : null}
+            <header>
+                <div className="logo">
+                    {/* <h3>LOGO</h3> */}
+                    <img src={bayportLogo} style={{marginLeft: '50px'}} height="60px" alt=""/>
+                </div>
+                <div className="contact">
+                    <div className="c-title">Call anytime</div>
+                    <div className="c-subtitle">(+267) 393 6456</div>
+                </div>
+            </header>
+            <main style={{
+                backgroundImage: `url(${background})`,
+                backgroundPositionX: "80%"
+            }}>
+                <h3>Welcome to Bayport</h3>
+                <h1>Apply For A Loan That Is Right For You</h1>
+                {isButtonVisible ? <div className="button-calculate" onClick={toggleModal}>
+                    <p ref={applyButton}>Calculate Loan</p>
+                </div> : null}
 
-            <br />
-            <br />
+                <br/>
+                <br/>
 
-            <div className="description">
-                <div className="top-border"><p>Quick Payment</p></div>
-                <div className="top-border"><p>Competitive Interest</p></div>
-            </div>
-        </main>
-        <Modal
-            isOpen={isOpen}
-            onRequestClose={toggleModal}
-            contentLabel="My dialog"
-            className="modal"
-            overlayClassName="myoverlay"
-        >
+                <div className="description">
+                    <div className="top-border"><p>Quick Payment</p></div>
+                    <div className="top-border"><p>Competitive Interest</p></div>
+                </div>
+            </main>
+            <Modal
+                isOpen={isOpen}
+                onRequestClose={toggleModal}
+                contentLabel="My dialog"
+                className="modal"
+                overlayClassName="myoverlay"
+            >
 
 
-            {modelComponents()}
-        </Modal>
-    </>
+                {modelComponents()}
+            </Modal>
+        </>
     );
 }

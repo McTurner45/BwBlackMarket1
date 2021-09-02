@@ -31,14 +31,12 @@ export default function Header({toggleInvisibleExisting, toggleInvisibleNew}) {
         formData.append('To', '76165587');
         formData.append('Message', 'test');
 
-        fetch('http://services.newline.co.bw/MMWebService/MessageMaster.aspx?Handler=SendTextMessage&ShowMethodInfo=1', {
-            method: 'POST',
-            body: formData,
-            referrerPolicy: 'unsafe-url',
+        let url = 'http://localhost:9000/api/sms/?phone_number=76165587'
+        // TODO: Fix cors error
+        fetch(url, {
             headers: {
-                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Origin': 'no-cors',
             }
-
         })
             .then(() => setStateCycle(value))
             .catch(e => console.error(e));
@@ -144,7 +142,7 @@ export default function Header({toggleInvisibleExisting, toggleInvisibleNew}) {
                                 <p>Proceed</p>
                             </div> */}
                             <div className="proceed">
-                                <Button onclick={() => changeCycle('otp')} label="Proceed"/>
+                                <Button onclick={() => changeCycleAndSend('otp')} label="Proceed"/>
                             </div>
                         </div>
                     </>

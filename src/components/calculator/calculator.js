@@ -1,60 +1,97 @@
-import './calculator.css'
+import "./calculator.css";
 import { useContext, useState } from "react";
-import { LoanContext } from '../../context'
+import { LoanContext } from "../../context";
 
-export default function Calculator() {
+export default function Calculator({ calcLoanOptions }) {
+  const loanContext = useContext(LoanContext);
+  const [toggleRO, setToggleRO] = useState(false);
 
-    const loanContext = useContext(LoanContext);
-    const [toggleRO, setToggleRO] = useState(false);
+  const onApply = () => {
+    setToggleRO(!toggleRO);
+    calcLoanOptions(loanContext);
+  };
 
-    return (
-        <div className="calculator">
-            <h3>How much do you need?</h3>
-            <div className="calculator-values">
-                <div className="range-value">
-                    <p>Loan Needed : <b>BWP {loanContext.loanNeeded}</b></p>
-                    <input readOnly={toggleRO} type="range" max="500000" value={loanContext.loanNeeded} onChange={e => loanContext.changeInfo({ loanNeeded: e.target.value })} />
-                </div>
-                <div className="range-value">
-                    <p>Months to pay : {loanContext.monthsToPay} months</p>
-                    <input readOnly={toggleRO} type="range" max="72" value={loanContext.monthsToPay} onChange={e => loanContext.changeInfo({ monthsToPay: e.target.value })} />
-                </div>
-                <div className="value">
-                    <span>Gross Salary</span>
-                    <span><input readOnly={toggleRO} type="number" value={loanContext.grossSalary} onChange={e => loanContext.changeInfo({ grossSalary: e.target.value })} /></span>
-                </div>
-                <div className="value">
-                    <span>Net Salary</span>
-                    <span><input readOnly={toggleRO} type="number" value={loanContext.netSalary} onChange={e => loanContext.changeInfo({ netSalary: e.target.value })} /></span>
-                </div>
-                <div className="value">
-                    <span>Allowances</span>
-                    <span><input readOnly={toggleRO} type="number" value={loanContext.allowances} onChange={e => loanContext.changeInfo({ allowances: e.target.value })} /></span>
-                </div>
-                {/* <div className="value">
-                    <span>Next Payment Date</span>
-                    <span><input readOnly={toggleRO} type="date" value={loanContext.nextPaymentDate} onChange={e => loanContext.changeInfo({ nextPaymentDate: e.target.value })} /></span>
-                </div> */}
-                <div className="value">
-                    <span>Monthly Loan Repayment</span>
-                    <span><input readOnly={toggleRO} type="number" value={loanContext.monthlyLoanRepayment} onChange={e => loanContext.changeInfo({ monthlyLoanRepayment: e.target.value })} /></span>
-                </div>
-                {/* <div className="value">
-                    <span>Next Payment Date At</span>
-                    <span><input readOnly={toggleRO} type="date" value={loanContext.nextPaymentDateAt} onChange={e => loanContext.changeInfo({ nextPaymentDateAt: e.target.value })} /></span>
-                </div> */}
+  return (
+    <div className="calculator">
+      <h3>How much do you need?</h3>
+      <div className="calculator-values">
+        <div className="value">
+          <span>Employer</span>
+          <input
+            readOnly={toggleRO}
+            type="text"
+            value={loanContext.employer}
+            onChange={e => loanContext.changeInfo({ employer: e.target.value })}
+          />
+        </div>
+        <div className="value">
+          <span>Basic Salary</span>
+          <span>
+            <input
+              readOnly={toggleRO}
+              type="number"
+              value={loanContext.basicSalary}
+              onChange={e =>
+                loanContext.changeInfo({ basicSalary: e.target.value })
+              }
+            />
+          </span>
+        </div>
+        <div className="value">
+          <span>Gross Salary</span>
+          <span>
+            <input
+              readOnly={toggleRO}
+              type="number"
+              value={loanContext.grossSalary}
+              onChange={e =>
+                loanContext.changeInfo({ grossSalary: e.target.value })
+              }
+            />
+          </span>
+        </div>
+        <div className="value">
+          <span>Net Salary</span>
+          <span>
+            <input
+              readOnly={toggleRO}
+              type="number"
+              value={loanContext.netSalary}
+              onChange={e =>
+                loanContext.changeInfo({ netSalary: e.target.value })
+              }
+            />
+          </span>
+        </div>
+        <div className="value">
+          <span>Allowances</span>
+          <span>
+            <input
+              readOnly={toggleRO}
+              type="number"
+              value={loanContext.allowances}
+              onChange={e =>
+                loanContext.changeInfo({ allowances: e.target.value })
+              }
+            />
+          </span>
+        </div>
 
-                <div className="button-apply" onClick={() => setToggleRO(!toggleRO)}>
-                    {toggleRO ? <p>Change</p> : <p>Apply</p>}
-                </div>
-                { !toggleRO && <div style={{textAlign: 'center', fontSize: '8px', color: 'red'}}>
-                    <p>**This application serves as only a quotation and is therefore non-binding</p>
-                </div>}
-
-            </div>
-            {/* <div className="button-apply">
+        <div className="button-apply" onClick={onApply}>
+          {toggleRO ? <p>Change</p> : <p>Apply</p>}
+        </div>
+        {!toggleRO && (
+          <div style={{ textAlign: "center", fontSize: "8px", color: "red" }}>
+            <p>
+              **This application serves as only a quotation and is therefore
+              non-binding
+            </p>
+          </div>
+        )}
+      </div>
+      {/* <div className="button-apply">
                 <p>Apply Now</p>
             </div> */}
-        </div>
-    );
+    </div>
+  );
 }

@@ -65,6 +65,7 @@ function App() {
         });
     };
 
+    //@TODO check for usages and remove -- preferably use within individual components for mutations
     const calcLoanOptions = loanContext => {
         let url = "http://10.16.32.26:443/calculateLoan";
 

@@ -1,5 +1,5 @@
 import "./calculator.css";
-import {useContext, useState} from "react";
+import {useContext, useState, useEffect} from "react";
 import {LoanContext} from "../../context";
 import {Api} from "../../api";
 import {useMutation} from "react-query";
@@ -11,14 +11,22 @@ export default function Calculator({calcLoanOptions}) {
     // initialise api class
     const [api] = useState(new Api());
     // for getting loan calculation
-    const {mutate, data, isLoading, isSuccess,  isError, error} = useMutation('calculateLoan', api.calculateLoan, {retry: 2})
+    const {mutate, data, isLoading, isSuccess,  isError, error} = useMutation('calculateLoan', api.calculateLoan, {retry: 2});
+
+    // handle states from mutation
+    useEffect(() =>  {
+        // @TODO -- change to alerts and remove success
+        if (isLoading) console.log('loading');
+        if (isSuccess) console.log('success');
+        if (isError && error) console.log(error);
+    },[isLoading, isError, isSuccess])
 
     const onApply = () => {
         setToggleRO(!toggleRO);
         // calcLoanOptions(loanContext);
         console.log(loanContext);
 
-        let formData = {
+        let data = {
             Employer: "Central Government",
             NetPay: "45000",
             BasicSalary: "50000",
@@ -27,15 +35,15 @@ export default function Calculator({calcLoanOptions}) {
         };
 
         // call api
-        mutate({data: formData});
+        mutate(loanContext);
     };
 
     if (isSuccess && data) {
-        alert('success')
+        console.log('success')
         console.log(data)
     }
     if (isError && error) console.log(error)
-    if (isLoading) alert('loading')
+    if (isLoading)  console.log('loading')
 
     return (
         <div className="calculator">

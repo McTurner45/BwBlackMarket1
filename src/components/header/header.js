@@ -54,7 +54,7 @@ export default function Header({
   };
 
   const toggleVisibilityNew = () => {
-    // toggleInvisibleNew();
+    toggleInvisibleNew();
     setIsOpen(false);
   };
 
@@ -243,11 +243,17 @@ export default function Header({
       >
         <h3>Welcome to Bayport</h3>
         <h1>Apply For A Loan That Is Right For You</h1>
-        {isButtonVisible ? (
+
+        {/*{isButtonVisible ? (*/}
+        {/*  <div className="button-calculate" onClick={toggleModal}>*/}
+        {/*    <p ref={applyButton}>Calculate Loan</p>*/}
+        {/*  </div>*/}
+        {/*) : null}*/}
+
+        {/*keep visible in case of cancel*/}
           <div className="button-calculate" onClick={toggleModal}>
-            <p ref={applyButton}>Calculate Loan</p>
+              <p ref={applyButton}>Calculate Loan</p>
           </div>
-        ) : null}
 
         <br />
         <br />

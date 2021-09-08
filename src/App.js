@@ -5,7 +5,8 @@ import {useState} from "react";
 import {LoanContext} from "./context";
 import Landing from "./components/landing/landing";
 import Footer from "./components/footer/footer";
-import {QueryClient, QueryClientProvider} from "react-query";
+import {QueryClient, QueryClientProvider, useMutation} from "react-query";
+import {Api} from "./api";
 
 // for react query -- Create a client
 const queryClient = new QueryClient();
@@ -75,24 +76,27 @@ function App() {
             TotalFixedAllowances: "1000"
         };
 
-        console.log(formData);
-        fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
-        })
-            .then(response => response.text)
-            .then(responseText => {
-                alert(responseText);
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        // call api
+        // mutate({data: formData});
+
+        // console.log(formData);
+        // fetch(url, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify(formData)
+        // })
+        //     .then(response => response.text)
+        //     .then(responseText => {
+        //         alert(responseText);
+        //     })
+        //     .catch(error => {
+        //         console.error(error);
+        //     });
     };
 
-    // const calculatorComponent =
+
 
     return (
         // wrap everything in react query provider

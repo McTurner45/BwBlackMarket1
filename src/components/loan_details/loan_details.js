@@ -1,15 +1,28 @@
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import './loan_details.css'
 import Modal from "react-modal";
 import Button from "../header/button";
+import {LoanContext} from "../../context";
 
 export default function LoanDetails({visibility, info}) {
-
+    // get change info from loan context -- used with inputs
+    const {changeInfo} = useContext(LoanContext);
     const [employmentDetails, setEmploymentDetails] = useState(false)
     const [agreement, setAggrement] = useState(false)
     const [isOpen, setIsOpen] = useState(false);
     const showDialog = () => {
         setIsOpen(!isOpen);
+    }
+
+    // processes value of gov. employee radio button and updates info
+    const processRadio = (e) => {
+        const target = e.target;
+        // check if gov employee radio
+        if (target.name === 'government_employee'){
+            // set info to this value
+            changeInfo({governmentEmployee: target.value})
+        }
+
     }
 
     return (
@@ -66,34 +79,42 @@ export default function LoanDetails({visibility, info}) {
 
                 </div>
             </div>
-            {employmentDetails ? <div className="employee-details">
+
+            {employmentDetails &&
+            <div className="employee-details">
                 <h3>Employee Details</h3>
                 <p>Are you a government employee?</p>
                 <div className="employee-choices">
                     <span className="employee-choice">
-                        <input type="radio" name="government_employee" value="yes"/> Yes
+                        <input type="radio" name="government_employee" value="yes" onChange={(e) => processRadio(e)}/> Yes
                     </span>
                     <span className="employee-choice">
-                        <input type="radio" name="government_employee" value="no"/> No
+                        <input type="radio" name="government_employee" value="no" onChange={(e) => processRadio(e)}/> No
                     </span>
                 </div>
-            </div> : null}
-            {visibility.newCustomer && employmentDetails ? <div className="personal-details">
+            </div>
+            }
+
+            {visibility.newCustomer && employmentDetails &&
+            <div className="personal-details">
                 <h3>Personnal Details</h3>
                 <div className="personal-details-values">
-                    <input type="text" placeholder="Names"/>
-                    <input type="text" placeholder="Surname"/>
+                    <input type="text" placeholder="First Names" onChange={e => changeInfo({names: e.target.value})}/>
+                    <input type="text" placeholder="Surname" onChange={e => changeInfo({surname: e.target.value})}/>
                 </div>
                 <div className="personal-details-values">
-                    <input type="text" placeholder="Phone Number"/>
-                    <input type="email" placeholder="Email Address"/>
+                    <input type="text" placeholder="Phone Number"
+                           onChange={e => changeInfo({phoneNumber: e.target.value})}/>
+                    <input type="email" placeholder="Email Address"
+                           onChange={e => changeInfo({emailAddress: e.target.value})}/>
                 </div>
                 <div className="personal-details-values">
-                    <input type="text" placeholder="ID Number"/>
-                    <input type="email" placeholder="Date of birth"/>
+                    <input type="text" placeholder="ID Number" onChange={e => changeInfo({omang: e.target.value})}/>
+                    <input type="email" placeholder="Date of birth" onChange={e => changeInfo({dob: e.target.value})}/>
                 </div>
                 <div className="personal-details-values">
-                    <input type="text" placeholder="Marital Status"/>
+                    <input type="text" placeholder="Marital Status"
+                           onChange={e => changeInfo({maritalStatus: e.target.value})}/>
                     {/* <input type="email" placeholder="Monthly Next Income" /> */}
                 </div>
                 <br/>
@@ -105,7 +126,8 @@ export default function LoanDetails({visibility, info}) {
                      onClick={() => showDialog()}>
                     <p>Submit</p>
                 </div>
-            </div> : null}
+            </div>
+            }
             <Modal
                 isOpen={isOpen}
                 onRequestClose={showDialog}
@@ -120,7 +142,11 @@ export default function LoanDetails({visibility, info}) {
                         of our agents</h1></div>
                     <br/>
                     <div className="proceed" style={{justifyContent: 'center'}}>
-                        <Button label="Done"/>
+                        <Button
+                            label="Done"
+                            // later use to refresh page -- temporarily use to close modal
+                            onclick={() => setIsOpen(false)}
+                        />
                     </div>
                 </div>
             </Modal>

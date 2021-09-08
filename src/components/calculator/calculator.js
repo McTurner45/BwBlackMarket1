@@ -35,7 +35,7 @@ export default function Calculator({calcLoanOptions}) {
         };
 
         // call api
-        mutate(loanContext);
+        mutate(data);
     };
 
     if (isSuccess && data) {

@@ -18,11 +18,15 @@ export default function LoanDetails({visibility, info}) {
     const processRadio = (e) => {
         const target = e.target;
         // check if gov employee radio
-        if (target.name === 'government_employee'){
+        if (target.name === 'government_employee') {
             // set info to this value
             changeInfo({governmentEmployee: target.value})
         }
 
+        // check if marital status
+        if (target.name === 'maritalStatus') {
+            changeInfo({maritalStatus: target.value})
+        }
     }
 
     return (
@@ -117,6 +121,8 @@ export default function LoanDetails({visibility, info}) {
                            onChange={e => changeInfo({maritalStatus: e.target.value})}/>
                     {/* <input type="email" placeholder="Monthly Next Income" /> */}
                 </div>
+
+
                 <br/>
                 <div className="button-proceed button-space"
                      style={{

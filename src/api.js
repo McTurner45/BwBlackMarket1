@@ -4,10 +4,9 @@ import axios from 'axios';
  * Class containing functions for interacting with the api.
  */
 export class Api {
-    // base firebase functions url
-    #baseFbFuncUrl = 'http://localhost:5001/duriga-loan-calculator/us-central1';
+
     // for calculating a loan
-    #calculateLoanUrl = `${this.#baseFbFuncUrl}/calculateLoan`;
+    #calculateLoanUrl = 'http://localhost:5000/calculateLoan';
 
     /**
      * Function used to calculate the loan details
@@ -17,9 +16,9 @@ export class Api {
     calculateLoan = async (formData) => {
         console.log(formData)
         // get the response from hitting the url
-        const response = await axios.post(this.#calculateLoanUrl, {"data": formData});
+        const response = await axios.post(this.#calculateLoanUrl, {"formData": formData});
         // return the data if successful
-        return response.data.result.section;
+        return response.data;
     }
 
 }

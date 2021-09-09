@@ -1,7 +1,7 @@
 import "./calculator.css";
 import {useContext, useState, useEffect} from "react";
 import {LoanContext} from "../../context";
-import {Api} from "../../api";
+import {Api} from "../../tools/api";
 import {useMutation} from "react-query";
 
 export default function Calculator({calcLoanOptions}) {

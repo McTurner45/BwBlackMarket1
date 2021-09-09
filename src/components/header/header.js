@@ -5,8 +5,8 @@ import Button from "./button";
 import bayportLogo from "./bayportlogo.png";
 import background from "./image.png";
 import {useMutation} from "react-query";
-import {Api} from "../../api";
-import {generateRandomLetters, generateRandomNumber} from "../../functions";
+import {Api} from "../../tools/api";
+import {generateRandomLetters, generateRandomNumber} from "../../tools/functions";
 
 Modal.setAppElement("#root");
 

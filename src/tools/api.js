@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {db, addToArray} from "./firebase";
 
 /**
  * Class containing functions for interacting with the api.
@@ -11,6 +12,8 @@ export class Api {
     #calculateLoanUrl = `${this.#nodeUrl}/calculateLoan`;
     // for sending an SMS
     #sendSMSUrl = `${this.#nodeUrl}/sendSMS`;
+    // clients collection reference
+    #clientsRef = db.collection('clients');
 
     /**
      * Function used to calculate the loan details
@@ -34,6 +37,15 @@ export class Api {
         const response = await axios.post(this.#sendSMSUrl, {"params": params});
         // return data is successful
         return response.data;
+    }
+
+    /**
+     * Get array of clients from db
+     * @param filter Array of objects of form {field: 'name', value: 'John'}
+     * @return array of clients or [] if query has no match
+     */
+    getClients = (filter) => {
+
     }
 
 }

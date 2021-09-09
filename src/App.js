@@ -6,8 +6,8 @@ import {LoanContext} from "./context";
 import Landing from "./components/landing/landing";
 import Footer from "./components/footer/footer";
 import {QueryClient, QueryClientProvider, useMutation} from "react-query";
-import {Api} from "./api";
-import {generateRandomLetters, generateRandomNumber} from "./functions";
+import {Api} from "./tools/api";
+import {generateRandomLetters, generateRandomNumber} from "./tools/functions";
 
 // for react query -- Create a client
 const queryClient = new QueryClient();

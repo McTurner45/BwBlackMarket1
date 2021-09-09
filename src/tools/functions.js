@@ -1,3 +1,4 @@
+
 /**
  * Generates random uppercase letters
  * @param length Number of letters to generate

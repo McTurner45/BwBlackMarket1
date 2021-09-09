@@ -17,6 +17,8 @@ export class Api {
     #clientsRef = db.collection('clients');
     // debug log reference in
     debugLogRef = db.collection('debugLog');
+    // for loan applications
+    #loanApplicationsRef = db.collection('loanApplications');
 
 
 
@@ -110,6 +112,71 @@ export class Api {
         let newClientRef = await this.#clientsRef.doc();
         // set that doc's details
         await newClientRef.set({...client, docId: newClientRef.id});
+    }
+
+    /**
+     * Add an application for a loan. Used as leads in dashboard
+     * @param application Object of structure {client: 'client object', chosenLoanOption: 'loan option object', allLoanOptions: 'array of all loan option objects'}
+     */
+    addLoanApplication = async (application) => {
+        // get a unique doc started
+        let docRef = await this.#loanApplicationsRef.doc();
+        // set that doc's details
+        await docRef.set({
+            // spill client info for easier querying later
+            ...application.client,
+
+            chosenLoanOption: application.chosenLoanOption,
+            allLoanOptions: application.allLoanOptions,
+
+            appliedOn: new Date(),
+
+            // add the document reference
+            docId: docRef.id});
+    }
+
+    /**
+     * @param filters Array of filters to use
+     */
+    getLoanApplications =  async (filters) => {
+        let docs;
+        // doc reference for getting -- db.collection('loanApplications')
+        let docsRef = this.#loanApplicationsRef;
+        // stores array of clients from the db
+        let loanApplications = [];
+
+        // check if filters was supplied first
+        filters.forEach(filter => {
+            // loop through and chain
+            if (filter.field !== 'appliedOn') docsRef = this.#chain(docsRef, filter);
+            // TODO else handle appliedOn filter field ... special because its a date
+        })
+
+        try {
+            // finish up query ref and get
+            docs = await docsRef.orderBy('appliedOn', 'asc').get();
+
+            // loop through docs from db and fill array
+            docs.forEach(doc => {
+                const data = doc.data();
+                // parse each client and add to array
+                loanApplications.push({
+                    // spill everything
+                    ...data,
+                    // special handling for date
+                    appliedOn: data.appliedOn.toDate()
+                })
+            });
+
+        } catch (err) {
+            // log into debug log
+            await this.logError(err);
+            // TODO edit and use error display like alert
+            console.log(err);
+        }
+
+        // return the result
+        return loanApplications;
     }
 
     /**

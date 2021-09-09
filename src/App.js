@@ -1,7 +1,7 @@
 import Header from "./components/header/header";
 import Calculator from "./components/calculator/calculator";
 import LoanDetails from "./components/loan_details/loan_details";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {LoanContext} from "./context";
 import Landing from "./components/landing/landing";
 import Footer from "./components/footer/footer";

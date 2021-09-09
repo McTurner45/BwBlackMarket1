@@ -1,16 +1,16 @@
 import "./header.css";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Modal from "react-modal";
 import Button from "./button";
 import bayportLogo from "./bayportlogo.png";
 import background from "./image.png";
+import {useMutation} from "react-query";
+import {Api} from "../../api";
+import {generateRandomLetters, generateRandomNumber} from "../../functions";
 
 Modal.setAppElement("#root");
 
-export default function Header({
-  toggleInvisibleExisting,
-  toggleInvisibleNew
-}) {
+export default function Header({toggleInvisibleExisting, toggleInvisibleNew}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const [cycle, setStateCycle] = useState("start");
@@ -20,6 +20,67 @@ export default function Header({
   const [isButtonVisible, setButtonVisible] = useState(true);
 
   const applyButton = useRef();
+
+  // initialise the api
+    const [api] = useState(new Api());
+    // stores OTP ID and OTP code when being sent
+    const [otp, setOTP] = useState({id: '', code: ''});
+    // stores user inputs from modal
+    const [inputs, setInputs] = useState({phone: ' ', enteredOTP: ''});
+    // for existing customer, store the state of their login -- i.e OTP verified or not
+    const [clientLoggedIn, setClientLoggedIn] = useState(false);
+
+  // for sending an SMS
+    const {mutate: mutateSendSMS, isLoading: mutateSendSMSLoading, isSuccess: mutateSendSMSSuccess, isError: mutateSendSMSError, error: mutateSendSMSErrorMessage} = useMutation('sendSMS', api.sendSMS, {retry: 2});
+
+    // check if the phone number entered is the same as in the db
+    const confirmPhone = () => {
+        // TODO get number from db and replace
+        const dbPhone = '';
+
+        // check equivalence
+        if (dbPhone.trim() == inputs.phone.trim()){
+            // send the OTP to the number
+            sendOTP();
+            // proceed to otp modal
+            changeCycle("otp");
+        }
+        // TODO: replace with error message
+        // no match send error
+        else {sendOTP(); changeCycle('otp');}
+    }
+
+    // send OTP message
+    const sendOTP = async () => {
+        // generate random letters
+        const id = await generateRandomLetters(4);
+        // generate random 4 digit OTP
+        const code = await generateRandomNumber(4);
+        // update OTP state and display
+        setOTP({id, code});
+
+        // get phone number from info, and create message
+        const params = {
+            recipient: `${inputs.phone}`,
+            message: `Dear customer, \n\nYour OTP for ${id} is ${code}`
+        }
+
+        // send OTP message
+        mutateSendSMS(params);
+    }
+
+    // confirm an OTP entered by user
+    const verifyOTP = () => {
+
+        if (inputs.otp.trim() == otp.code){
+            // successful, allow login
+            setClientLoggedIn(true)
+        }
+
+        // incorrect otp, shpw error message
+        else alert('Incorrect OTP, please try again.')
+        // @TODO edit error showing as required
+    }
 
   const changeCycle = value => {
     setStateCycle(value);
@@ -161,6 +222,7 @@ export default function Header({
           </>
         );
         break;
+
       case "confirm_no":
         components = (
           <>
@@ -171,23 +233,27 @@ export default function Header({
               <div className="title">
                 <h1>Phone Number Confirmation</h1>
               </div>
+              {/* @TODO add phone number from database in instruction and confirm match between number in db and entered number*/}
               <div>
                 <p>Please enter the contact number used in your application</p>
               </div>
-              <input type="text" placeholder="Phone Number " />
+              {/* onChange update the enteredPhone for confirmation with phone number in db*/}
+              <input type="text" placeholder="Phone Number" onChange={(e)=> setInputs( {...inputs, phone: e.target.value} ) }/>
               {/* <div onClick={() => changeCycle("otp")}>
                                 <p>Proceed</p>
                             </div> */}
               <div className="proceed">
                 <Button
-                  onclick={() => changeCycleAndSend("otp")}
-                  label="Proceed"
+
+                  onclick={() => confirmPhone()}
+                  label="Confirm"
                 />
               </div>
             </div>
           </>
         );
         break;
+
       case "otp":
         components = (
           <div className="otp-modal">
@@ -195,18 +261,52 @@ export default function Header({
               close
             </div>
             <div className="title">
-              <h1>Verification code</h1>
+              <h1>OTP Verification Code</h1>
             </div>
-            <div>
-              <p>Please enter the verification code sent to you</p>
-            </div>
-            <input type="text" placeholder="OTP Code " />
-            <div className="proceed">
-              <Button
-                onclick={() => toggleVisibilityExisting()}
-                label="Proceed"
-              />
-            </div>
+
+
+                {!clientLoggedIn
+                    ?
+                    // client is not logged in, verify otp first
+                    <div className="proceed">>
+                        <div>
+                            <p>Please enter the verification code for {otp.id} sent to {inputs.phone}</p>
+                        </div>
+                        <input type="text" placeholder={`OTP Code ${otp.id} - `} onChange={(e)=> setInputs({...inputs, otp: e.target.value})}  />
+                        <Button
+                            onclick={() => verifyOTP()}
+                            label="Verify OTP"
+                        />
+
+                        {/*/!*in case of any issues, allow resending of OTP*!/*/}
+                        {/*<br />*/}
+                        {/*<div>*/}
+                        {/*    <p><i>I did not receive an OTP..</i></p>*/}
+                        {/*</div>*/}
+                        {/*<Button*/}
+                        {/*    onclick={() => sendOTP()}*/}
+                        {/*    label="Verify OTP"*/}
+                        {/*/>*/}
+                    </div>
+
+                    :
+
+                    // client OTP is verified is now, proceed
+                    <div className={'proceed'}>
+                        <div>
+                            <p>OTP verified successfully.</p>
+                        </div>
+                        <Button
+                            onclick={() => {
+                                toggleVisibilityExisting();
+                                // reset login state in case of redo
+                                setClientLoggedIn(false);
+                            }}
+                            label="Proceed"
+                        />
+                    </div>
+                }
+
           </div>
         );
         break;

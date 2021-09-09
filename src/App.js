@@ -7,6 +7,7 @@ import Landing from "./components/landing/landing";
 import Footer from "./components/footer/footer";
 import {QueryClient, QueryClientProvider, useMutation} from "react-query";
 import {Api} from "./api";
+import {generateRandomLetters, generateRandomNumber} from "./functions";
 
 // for react query -- Create a client
 const queryClient = new QueryClient();
@@ -96,8 +97,6 @@ function App() {
         //         console.error(error);
         //     });
     };
-
-
 
     return (
         // wrap everything in react query provider

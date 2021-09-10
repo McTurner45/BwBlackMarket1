@@ -26,9 +26,11 @@ export default function Header({toggleInvisibleExisting, toggleInvisibleNew}) {
     // stores OTP ID and OTP code when being sent
     const [otp, setOTP] = useState({id: '', code: ''});
     // stores user inputs from modal
-    const [inputs, setInputs] = useState({phone: ' ', enteredOTP: ''});
+    const [inputs, setInputs] = useState({phone: ' ', enteredOTP: ' ', omang: ' '});
     // for existing customer, store the state of their login -- i.e OTP verified or not
     const [clientLoggedIn, setClientLoggedIn] = useState(false);
+    // stores current client's data in this component
+    const [client, setClient] = useState({});
 
     // for sending an SMS
     const {
@@ -39,10 +41,35 @@ export default function Header({toggleInvisibleExisting, toggleInvisibleNew}) {
         error: mutateSendSMSErrorMessage
     } = useMutation('sendSMS', api.sendSMS, {retry: 2});
 
+    // for getting a client
+    const {
+        data: clientsData,
+        mutate: mutateGetClients,
+        isLoading: mutateGetClientsLoading,
+        isSuccess: mutateGetClientsSuccess,
+        isError: mutateGetClientsError,
+        error: mutateGetClientsErrorMessage,
+        reset: mutateGetClientsReset
+    } = useMutation('getClients', api.getClients, {retry: 2});
+
+    // whenever clientsData changes, set current client to the 0th client from results
+    useEffect(()=>{
+        let currentClient;
+        if (clientsData?.length > 0) currentClient = clientsData[0];
+
+        // TODO set current client to something in the context -- if needed
+        setClient(currentClient);
+
+        console.log(currentClient)
+    }, [clientsData])
+
     // check if the phone number entered is the same as in the db
     const confirmPhone = () => {
-        // TODO get number from db and replace
-        const dbPhone = '';
+        // client's phone number from db
+        let dbPhone = ' ';
+        // ensure current client is not undefined from previous steps
+        if (client) dbPhone = client.phoneNumber.trim();
+        else alert('No client data, please refresh this page.')
 
         // check equivalence
         if (dbPhone.trim() == inputs.phone.trim()) {
@@ -51,12 +78,9 @@ export default function Header({toggleInvisibleExisting, toggleInvisibleNew}) {
             // proceed to otp modal
             changeCycle("otp");
         }
-            // TODO: replace with error message
+            // TODO: replace with proper error message
         // no match send error
-        else {
-            sendOTP();
-            changeCycle('otp');
-        }
+        else alert('Client\'s phone number not on record, please refresh this page.')
     }
 
     // send OTP message
@@ -89,6 +113,17 @@ export default function Header({toggleInvisibleExisting, toggleInvisibleNew}) {
         // incorrect otp, shpw error message
         else alert('Incorrect OTP, please try again.')
         // @TODO edit error showing as required
+    }
+
+    // get a clint's details form the database using their omang
+    const getClientDetails = () => {
+        // clear whatever is currently stored
+        mutateGetClientsReset();
+        // check db for client using omang
+        mutateGetClients([{field: 'omang', value: inputs.omang}])
+
+        // move to searching dialogue
+        changeCycle('searching_client')
     }
 
     const changeCycle = value => {
@@ -217,16 +252,89 @@ export default function Header({toggleInvisibleExisting, toggleInvisibleNew}) {
                             <div>
                                 <p>Please enter your ID / Passport Number</p>
                             </div>
-                            <input type="text" placeholder="ID / Passport Number "/>
+                            <input
+                                type="text"
+                                id={"inputOmang"} name={"inputOmang"}
+                                placeholder="ID / Passport Number"
+                                onChange={(e) => {
+                                    setInputs({...inputs, omang: `${e.target.value}`.trim()})
+                                }}/>
                             {/* <div onClick={() => changeCycle("otp")}>
                                 <p>Proceed</p>
                             </div> */}
                             <div className="proceed">
                                 <Button
-                                    onclick={() => changeCycle("confirm_no")}
+                                    onclick={() => getClientDetails()}
                                     label="Proceed"
                                 />
                             </div>
+                        </div>
+                    </>
+                );
+                break;
+
+                // while waiting for client details to arrive
+            case "searching_client":
+                components = (
+                    <>
+                        <div className="membership-modal">
+                            <div className="close" onClick={toggleModal}>
+                                close
+                            </div>
+                            <div className="title">
+                                <h1>Searching for Client</h1>
+                            </div>
+
+                            {/*show while query is loading */}
+                            {mutateGetClientsLoading &&
+                                <div>
+                                    <p><i>Kindly wait while we search for your details...</i></p>
+                                </div>
+                            }
+
+                            {/*show if error occurred with query*/}
+                            {mutateGetClientsError &&
+                            <div>
+                                <p>An error occurred, please refresh this page</p>
+                            </div>
+                            }
+
+
+                            {(clientsData?.length > 0)
+                                ?
+                                // searching complete and clients data is not empty array
+                                <>
+                                    <div>
+                                        <p>Client found. Please Proceed.</p>
+                                    </div>
+                                    <div className="proceed">
+                                        <Button
+                                            // go to phone number confirmation
+                                            onclick={() => changeCycle('confirm_no')}
+                                            label="Proceed"
+                                        />
+                                    </div>
+                                </>
+
+                                :
+                                // no data there yet, check if successful
+                                (mutateGetClientsSuccess &&
+                                    // successful query, client must not have been found
+                                    <>
+                                        <div>
+                                            <p>Omang not found. Please go back and check again, or restart as a new customer.</p>
+                                        </div>
+                                        <div className="proceed">
+                                            <Button
+                                                onclick={() => changeCycle('yes')}
+                                                label="Back"
+                                            />
+                                        </div>
+                                    </>
+                                )
+
+                            }
+
                         </div>
                     </>
                 );
@@ -242,12 +350,14 @@ export default function Header({toggleInvisibleExisting, toggleInvisibleNew}) {
                             <div className="title">
                                 <h1>Phone Number Confirmation</h1>
                             </div>
-                            {/* @TODO add phone number from database in instruction and confirm match between number in db and entered number*/}
+
                             <div>
-                                <p>Please enter the contact number used in your application</p>
+                                <p>Please enter the contact number used in your application. Ends with <i>{clientsData[0].phoneNumber.slice(-2)}</i> </p>
                             </div>
                             {/* onChange update the enteredPhone for confirmation with phone number in db*/}
-                            <input type="text" placeholder="Phone Number"
+                            <input type="text"
+                                   placeholder="Phone Number"
+                                   id={"inputPhone"} name={"inputPhone"}
                                    onChange={(e) => setInputs({...inputs, phone: e.target.value})}/>
                             {/* <div onClick={() => changeCycle("otp")}>
                                 <p>Proceed</p>
